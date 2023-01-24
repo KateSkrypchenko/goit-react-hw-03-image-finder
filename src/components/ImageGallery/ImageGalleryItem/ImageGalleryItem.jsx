@@ -32,14 +32,6 @@ export class ImageGalleryItem extends Component {
     }
   };
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
   render() {
     const { showModal } = this.state;
     const { largeImageURL, webformatURL, tags } = this.props;
@@ -48,7 +40,13 @@ export class ImageGalleryItem extends Component {
         <Item>
           <Image src={webformatURL} alt={tags} loading="lazy" onClick={this.openModal} />
         </Item>
-        {showModal && <Modal largeImageURL={largeImageURL} onClose={this.handleBackdropClick} />}
+        {showModal && (
+          <Modal
+            largeImageURL={largeImageURL}
+            onClose={this.handleBackdropClick}
+            onChange={this.handleKeyDown}
+          />
+        )}
       </div>
     );
   }
