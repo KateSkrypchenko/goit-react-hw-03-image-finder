@@ -4,11 +4,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { GlobalStyle } from './GlobalStyles';
+import { AppBox } from './App.styled';
 
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { Loader } from 'components/Loader/Loader';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-import { fetchSearchImage } from './services/Api';
+import { fetchSearchImage } from './Api';
 import { Button } from 'components/Button/Button';
 
 // const searchApiService = new SearchApiService();
@@ -70,14 +71,14 @@ export class App extends Component {
   render() {
     const { isLoading, images } = this.state;
     return (
-      <>
+      <AppBox>
         <GlobalStyle />
         <SearchBar onSubmit={this.createContactItem} isSubmitting={isLoading} />
-        {isLoading && <Loader />}
         {images.length !== 0 && <ImageGallery items={images} />}
+        {isLoading && <Loader />}
         {images.length !== 0 && <Button onClick={this.loadMore} />}
         <ToastContainer autoClose={3000} />
-      </>
+      </AppBox>
     );
   }
 }
