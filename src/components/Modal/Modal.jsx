@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Overlay, ModalWindow } from './Modal.styled';
 import { createPortal } from 'react-dom';
@@ -6,22 +7,28 @@ const modalRoot = document.querySelector('#modal-root');
 
 export class Modal extends Component {
   componentDidMount() {
-    console.log('componentDidMount');
-    window.addEventListener('keydown', this.props.handleKeyDown);
+    window.addEventListener('keydown', this.props.onChange);
   }
 
   componentWillUnmount() {
-    console.log('componentWillUnmountut');
-    window.removeEventListener('keydown', this.props.handleKeyDown);
+    window.removeEventListener('keydown', this.props.onChange);
   }
+
   render() {
+    const { onClose, largeImageURL } = this.props;
     return createPortal(
-      <Overlay onClick={this.props.onClose}>
+      <Overlay onClick={onClose}>
         <ModalWindow>
-          <img src={this.props.largeImageURL} alt="" />
+          <img src={largeImageURL} alt="" />
         </ModalWindow>
       </Overlay>,
       modalRoot
     );
   }
 }
+
+Modal.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+};

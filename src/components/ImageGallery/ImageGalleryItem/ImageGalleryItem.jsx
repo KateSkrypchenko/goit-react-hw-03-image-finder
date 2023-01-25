@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Item, Image } from './ImageGalleryItem.styled';
 
@@ -16,7 +16,6 @@ export class ImageGalleryItem extends Component {
   };
 
   handleKeyDown = event => {
-    console.log(event);
     if (event.code === 'Escape') {
       this.setState({
         showModal: false,
@@ -52,9 +51,8 @@ export class ImageGalleryItem extends Component {
   }
 }
 
-// ContactListItem.propTypes = {
-//   id: PropTypes.string.isRequired,
-//   name: PropTypes.string.isRequired,
-//   number: PropTypes.string.isRequired,
-//   onDelete: PropTypes.func.isRequired,
-// };
+ImageGalleryItem.propTypes = {
+  largeImageURL: PropTypes.string.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+};
