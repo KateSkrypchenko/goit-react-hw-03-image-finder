@@ -47,6 +47,7 @@ export class App extends Component {
       const response = await fetchSearchImage(value, page);
       this.setState(prevState => ({
         images: [...prevState.images, ...response.hits],
+        isLoadMore: true,
       }));
       this.responseFetch(response);
     } catch (error) {
@@ -74,6 +75,7 @@ export class App extends Component {
   loadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
+      isLoadMore: false,
     }));
   };
 
