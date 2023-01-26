@@ -9,10 +9,9 @@ import { AppBox } from './App.styled';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { Loader } from 'components/Loader/Loader';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
-import { fetchSearchImage } from './services/Api';
+import { fetchSearchImage } from '../services/Api';
 import { Button } from 'components/Button/Button';
 
-// const searchApiService = new SearchApiService();
 export class App extends Component {
   state = {
     value: '',
@@ -28,7 +27,7 @@ export class App extends Component {
         value: event,
         images: [],
         page: 1,
-        isLoadMore: true,
+        isLoadMore: false,
       });
     }
   };
@@ -61,9 +60,11 @@ export class App extends Component {
     const PER_PAGE = 12;
     if (this.state.page === 1 && totalHits !== 0) {
       toast.success(`Hooray! We found ${totalHits} images`);
+      this.setState({ isLoadMore: true });
     }
     if (totalHits === 0) {
       toast.warn(`Sorry, there are no images matching your search query. Please try again.`);
+      this.setState({ isLoadMore: false });
     } else if (hits.length < PER_PAGE) {
       toast.info('These are all the pictures what we found. Try something else');
       this.setState({ isLoadMore: false });

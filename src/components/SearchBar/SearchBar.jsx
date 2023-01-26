@@ -22,14 +22,14 @@ export class SearchBar extends Component {
       return toast.error('Please, enter the request!');
     }
     this.props.onSubmit(this.state.value.trim());
-    this.resetInputValue();
+    // this.resetInputValue();
   };
 
-  resetInputValue = () => {
-    this.setState({
-      value: '',
-    });
-  };
+  // resetInputValue = () => {
+  //   this.setState({
+  //     value: '',
+  //   });
+  // };
 
   render() {
     const { value } = this.state;
